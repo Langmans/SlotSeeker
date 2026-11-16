@@ -105,15 +105,15 @@ local function Evaluate(self, row, bag)
     for _, offer in ipairs(bag.vendors or NONE) do
         local npc = data.npcs[offer.npc]
         if npc and Serves(npc.side) and (not row.vendor or offer.cost < row.vendor) then
-            row.vendor, cheapest = offer.cost, npc
+            row.vendor, cheapest = offer.cost, offer.npc
         end
     end
-    if cheapest then Consider(row, S.vendor, T.now, nil, cheapest.name) end
+    if cheapest then Consider(row, S.vendor, T.now, nil, self:NpcName(cheapest)) end
     for _, id in ipairs(bag.quests or NONE) do
         local quest = data.quests[id]
         if quest and Serves(quest.side) then
             local tier = Addon.QuestTier(quest.level, quest.min, player.level)
-            if Consider(row, S.quest, tier, quest.level, L.WHERE_QUEST:format(quest.name, quest.level)) then
+            if Consider(row, S.quest, tier, quest.level, L.WHERE_QUEST:format(self:QuestName(id), quest.level)) then
                 row.quest = id
             end
         end
@@ -130,8 +130,7 @@ local function Evaluate(self, row, bag)
         Consider(row, S.auction, T.now)
     end
     for _, drop in ipairs(bag.drops or NONE) do
-        local npc = data.npcs[drop.npc]
-        local name = npc and npc.name or L.UNKNOWN:format(drop.npc)
+        local name = self:NpcName(drop.npc)
         Consider(
             row,
             S.drop,

@@ -5,7 +5,7 @@
 ## Author: Langmans
 ## Version: @project-version@
 ## SavedVariables: SlotSeekerDB
-## OptionalDeps: Ace3, LibStub, Auctionator, WoWUnit
+## OptionalDeps: Ace3, LibStub, Auctionator, QuestieDB, WoWUnit
 ## IconTexture: Interface\Icons\INV_Misc_Bag_10
 ## X-License: MIT
 

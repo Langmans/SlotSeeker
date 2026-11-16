@@ -18,6 +18,8 @@ disappearing.
   warlock's soul bag.
 - **Prices**: the vendor's price comes with the data; the auction house price from
   [Auctionator](https://www.curseforge.com/wow/addons/auctionator) when you have it.
+- **With [Questie](https://www.curseforge.com/wow/addons/questie)**: quest and NPC names in your
+  client's language, and quest givers and spawn spots the data lacks, from its QuestieDB.
 
 ## Commands
 
@@ -61,6 +63,16 @@ prices, reward quests with their level and giver, crafts with their skill, named
 droppers at most) or a world drop, and the NPCs' spawn spots. Test and GM bags (no source) are
 left out. A comment over a bag says how it differs from Classic Era where Wowhead says so
 ("Bag slots 8 instead of 4"). `tests\data_spec.lua` checks that every reference in it resolves.
+
+### QuestieDB
+
+`Core\Questie.lua` reads QuestieDB, when installed, through its public API `LibQuestieDB`
+(contract 4, checked with `RequireContract`), at run time only: QuestieDB is GPL-3.0 and none of
+its data is copied into this MIT addon. It gives quest and NPC names in the client's language,
+a quest's first NPC starter where the data has no giver, and an NPC's spawns where the data has
+no pins. Its spawns are per AreaID; its ZoneDB support module's `areaIdToUiMapId` tables (Lua
+text, read once) give the uiMapID LibGoThere takes. Every read goes through `pcall`: a failing
+or incompatible QuestieDB leaves the addon's own data.
 
 ### Saved data (`SlotSeekerDB`, AceDB)
 

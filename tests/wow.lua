@@ -195,6 +195,7 @@ end
 ---@field noTooltipData boolean? a client without TooltipDataProcessor
 ---@field realData boolean? keep the generated Data\ file instead of the fixture
 ---@field auction table<number, number>? Auctionator's prices by item ID; nil: no Auctionator
+---@field questie table? QuestieDB's view: quests[id] = { name, startedBy }, npcs[id] = { name, spawns }, maps (AreaID -> uiMapID, nil: no zone table), contract (4 by default), broken (every read raises); nil: no QuestieDB
 
 ---@param opts TestClientOptions?
 function NewClient(opts)
@@ -407,6 +408,43 @@ function NewClient(opts)
                 },
             }
         or nil
+
+    -- QuestieDB's public API (LibQuestieDB), when opts.questie gives its view: per-field readers
+    -- on Quest and Npc, RequireContract, and the zone table as Lua text in its ZoneDB support
+    -- module, as QuestieDB ships it.
+    local questie = opts.questie
+    if questie then
+        local function reader(entities, field)
+            return function(id)
+                if questie.broken then error("QuestieDB broke") end
+                local entity = entities[id]
+                return entity and entity[field]
+            end
+        end
+        local function lua(map)
+            local parts = {}
+            for area, uiMap in pairs(map) do
+                parts[#parts + 1] = ("[%d] = %d"):format(area, uiMap)
+            end
+            return "return { " .. table.concat(parts, ", ") .. " }"
+        end
+        local private = questie.maps and { areaIdToUiMapId = lua(questie.maps), areaIdToUiMapIdOverride = "return {}" }
+            or {}
+        LibQuestieDB = {
+            RequireContract = function(required)
+                return required <= (questie.contract or 4)
+            end,
+            Quest = { name = reader(questie.quests, "name"), startedBy = reader(questie.quests, "startedBy") },
+            Npc = { name = reader(questie.npcs, "name"), spawns = reader(questie.npcs, "spawns") },
+            Support = {
+                Get = function(name)
+                    if name == "ZoneDB" then return { private = private } end
+                end,
+            },
+        }
+    else
+        LibQuestieDB = nil
+    end
 
     -- The chat box's link insertion. client.linked: every link put in.
     client.linked = {}

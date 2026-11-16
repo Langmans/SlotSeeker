@@ -2,6 +2,7 @@
     <!-- Addon.lua first: it makes the addon object every other file adds to. -->
     <Script file="Addon.lua"/>
     <Script file="Bags.lua"/>
+    <Script file="Questie.lua"/>
     <Script file="Upgrades.lua"/>
     <Script file="Tooltip.lua"/>
     <Script file="Route.lua"/>

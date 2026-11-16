@@ -12,3 +12,5 @@
   (LibGoThere), Shift-click links the bag.
 - A tooltip line under every bag: how many slots it gains.
 - Auction house prices from Auctionator when it is installed.
+- With Questie: quest and NPC names in the client's language, and quest givers and spawn spots
+  from its QuestieDB where the data has none.
