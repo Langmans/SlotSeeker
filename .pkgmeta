@@ -1,0 +1,69 @@
+package-as: SlotSeeker
+
+# The libraries are fetched at package time and never committed. Ace3 is pinned to the same commit
+# on master of its GitHub mirror as FishCatchVisualizer, BattleCry and Huntsworn: the latest release
+# (Release-r1403) lacks AceDB's WoW: Forever fixes. tests/libs.lua reads this block and fetches the
+# same commits into Libs/ for the tests, so tests and release always run the same libraries.
+externals:
+  Libs/LibStub:
+    url: https://github.com/WoWUIDev/Ace3.git
+    commit: 40f4cc1356ae7fcc0cf71fc0a19dc7d50d6ae6c2
+    path: LibStub
+  Libs/CallbackHandler-1.0:
+    url: https://github.com/WoWUIDev/Ace3.git
+    commit: 40f4cc1356ae7fcc0cf71fc0a19dc7d50d6ae6c2
+    path: CallbackHandler-1.0
+  Libs/AceAddon-3.0:
+    url: https://github.com/WoWUIDev/Ace3.git
+    commit: 40f4cc1356ae7fcc0cf71fc0a19dc7d50d6ae6c2
+    path: AceAddon-3.0
+  Libs/AceEvent-3.0:
+    url: https://github.com/WoWUIDev/Ace3.git
+    commit: 40f4cc1356ae7fcc0cf71fc0a19dc7d50d6ae6c2
+    path: AceEvent-3.0
+  Libs/AceConsole-3.0:
+    url: https://github.com/WoWUIDev/Ace3.git
+    commit: 40f4cc1356ae7fcc0cf71fc0a19dc7d50d6ae6c2
+    path: AceConsole-3.0
+  Libs/AceDB-3.0:
+    url: https://github.com/WoWUIDev/Ace3.git
+    commit: 40f4cc1356ae7fcc0cf71fc0a19dc7d50d6ae6c2
+    path: AceDB-3.0
+  Libs/AceLocale-3.0:
+    url: https://github.com/WoWUIDev/Ace3.git
+    commit: 40f4cc1356ae7fcc0cf71fc0a19dc7d50d6ae6c2
+    path: AceLocale-3.0
+  Libs/AceGUI-3.0:
+    url: https://github.com/WoWUIDev/Ace3.git
+    commit: 40f4cc1356ae7fcc0cf71fc0a19dc7d50d6ae6c2
+    path: AceGUI-3.0
+  Libs/AceConfig-3.0:
+    url: https://github.com/WoWUIDev/Ace3.git
+    commit: 40f4cc1356ae7fcc0cf71fc0a19dc7d50d6ae6c2
+    path: AceConfig-3.0
+  # The list's filter box and grid (github.com/Langmans/LibDataGrid-1.0, MIT); the same commit
+  # Huntsworn pins.
+  Libs/LibDataGrid-1.0:
+    url: https://github.com/Langmans/LibDataGrid-1.0.git
+    commit: 86c05b3cc1dced18983a856f5b1c6db983d3fff7
+  # Sends the player to a vendor or quest giver through their route or waypoint addon
+  # (github.com/Langmans/LibGoThere-1.0, MIT). While its MINOR is 1, every embedder pins the same
+  # commit (Huntsworn, ReagentRecipeVendorTooltips).
+  Libs/LibGoThere-1.0:
+    url: https://github.com/Langmans/LibGoThere-1.0.git
+    commit: 510d0318645d1a2ce01d159c761d3b5da9567d53
+
+# Release notes come from this file instead of the commit log.
+manual-changelog:
+  filename: CHANGELOG.md
+  markup-type: markdown
+
+# Files starting with a dot are left out by the packager already.
+ignore:
+  - annotations
+  - coverage
+  - tests
+  - slotseeker-dev-1.rockspec
+  - stylua.toml
+  - tasks
+  - PLAN.md

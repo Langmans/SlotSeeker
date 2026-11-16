@@ -1,0 +1,11 @@
+-- luacov settings, used by `busted --coverage` and by tests/check.lua for the report.
+-- Only the addon's own code counts; the libraries (Libs/), the generated data (Data/), the in-game
+-- tests (InGame/) and the tests do not. A file no test loads still shows up, at 0%, so it cannot
+-- slip past the 100% check.
+return {
+    statsfile = "coverage/luacov.stats.out",
+    reportfile = "coverage/lcov.info",
+    include = { "^%./Core/", "^Core/" },
+    exclude = { "Libs/", "Data/", "InGame/", "tests/" },
+    includeuntestedfiles = { "Core" },
+}

@@ -1,0 +1,18 @@
+## Interface: 16001
+## Title: SlotSeeker
+## Category: Bags & Inventory
+## Notes: Where to get a bigger bag than the smallest one you carry, at your level and with your professions: vendors, quests, crafts, drops and the auction house, in one sortable list.
+## Author: Langmans
+## Version: @project-version@
+## SavedVariables: SlotSeekerDB
+## OptionalDeps: Ace3, LibStub, Auctionator, WoWUnit
+## IconTexture: Interface\Icons\INV_Misc_Bag_10
+## X-License: MIT
+
+embeds.xml
+Locales\Locales.xml
+Core\Core.xml
+Data\Forever\Bags.lua
+#@debug@
+InGame\Tests.lua
+#@end-debug@

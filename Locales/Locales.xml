@@ -1,0 +1,19 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+    <!-- English is the source and the fallback for every client language. Each other language has
+         a file of its own: the packager puts that language's strings from the addon's
+         localization page on CurseForge in place of its @localization tag. Only the client's own
+         language takes (NewLocale gives nil for the rest); a string nobody has translated yet is
+         left out, so AceLocale falls back to English. In a copy straight from the repository the
+         tags are comments, and every language is English. -->
+    <Script file="enUS.lua"/>
+    <Script file="deDE.lua"/>
+    <Script file="esES.lua"/>
+    <Script file="esMX.lua"/>
+    <Script file="frFR.lua"/>
+    <Script file="itIT.lua"/>
+    <Script file="koKR.lua"/>
+    <Script file="ptBR.lua"/>
+    <Script file="ruRU.lua"/>
+    <Script file="zhCN.lua"/>
+    <Script file="zhTW.lua"/>
+</Ui>

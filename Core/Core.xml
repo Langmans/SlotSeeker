@@ -1,0 +1,13 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+    <!-- Addon.lua first: it makes the addon object every other file adds to. -->
+    <Script file="Addon.lua"/>
+    <Script file="Bags.lua"/>
+    <Script file="Upgrades.lua"/>
+    <Script file="Tooltip.lua"/>
+    <Script file="Route.lua"/>
+    <Script file="Window.lua"/>
+    <Script file="Commands.lua"/>
+    <Script file="Options.lua"/>
+    <!-- Development only, last: it hooks the methods above. One @debug block, empty in a release. -->
+    <Script file="Dev.lua"/>
+</Ui>
